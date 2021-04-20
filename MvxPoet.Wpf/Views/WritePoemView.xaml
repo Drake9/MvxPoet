@@ -1,0 +1,62 @@
+﻿<views:MvxWpfView 
+    xmlns:views="clr-namespace:MvvmCross.Platforms.Wpf.Views;assembly=MvvmCross.Platforms.Wpf"
+    xmlns:mvx="clr-namespace:MvvmCross.Platforms.Wpf.Binding;assembly=MvvmCross.Platforms.Wpf"
+    
+    x:Class="MvxPoet.Wpf.Views.WritePoemView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MvxPoet.Wpf.Views"
+             mc:Ignorable="d" FontSize="16"
+             d:DesignHeight="750" d:DesignWidth="1000">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="70"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+
+        <Button x:Name="ReadButton" Grid.Column="1" Grid.Row="1" Margin="10" MinWidth="50" MaxWidth="50" Click="ReadButton_Click">Wczytaj</Button>
+        <Button mvx:Bi.nd="Command WriteToFileCommand" IsEnabled="{Binding CanWriteToFile}" Grid.Column="2" Grid.Row="1" Margin="10" MinWidth="50" MaxWidth="50" HorizontalAlignment="Left">Zapisz</Button>
+        <TextBlock Grid.Column="1" Grid.Row="2" Margin="10" MinWidth="50" TextAlignment="Right">Tytuł:</TextBlock>
+        <TextBox x:Name="Title" Grid.Column="2" Grid.Row="2" Margin="10" Width="auto" Grid.ColumnSpan="3" Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox x:Name="Text" Grid.Column="1" Grid.Row="3" Margin="10" MinWidth="450" MinHeight="580" Grid.ColumnSpan="4" Text="{Binding Text, UpdateSourceTrigger=PropertyChanged}" AcceptsReturn="True" AcceptsTab="True" TextBlock.LineHeight="20"/>
+        <ListView Grid.Column="5" Grid.Row="3"  Margin="10"  ItemsSource="{Binding LinesEndings}">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="Height" Value="21" />
+                </Style>
+            </ListView.ItemContainerStyle>
+        </ListView>
+        <ListView Grid.Column="6" Grid.Row="3" Margin="10" ItemsSource="{Binding NumbersOfSyllables}">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="Height" Value="21" />
+                </Style>
+            </ListView.ItemContainerStyle>
+        </ListView>
+        <ListView Grid.Column="7" Grid.Row="3" Margin="10" ItemsSource="{Binding Rhymes}">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="Height" Value="21" />
+                </Style>
+            </ListView.ItemContainerStyle>
+        </ListView>
+    </Grid>
+</views:MvxWpfView>

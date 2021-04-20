@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31019.35
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvxPoet.Core", "MvxPoet.Core\MvxPoet.Core.csproj", "{67FBE8A5-B37C-4F09-B5E5-AD5D57CD60A7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvxPoet.Wpf", "MvxPoet.Wpf\MvxPoet.Wpf.csproj", "{28C7DDAE-F589-48A3-8D56-A03EC9A06D65}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{67FBE8A5-B37C-4F09-B5E5-AD5D57CD60A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67FBE8A5-B37C-4F09-B5E5-AD5D57CD60A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67FBE8A5-B37C-4F09-B5E5-AD5D57CD60A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67FBE8A5-B37C-4F09-B5E5-AD5D57CD60A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28C7DDAE-F589-48A3-8D56-A03EC9A06D65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28C7DDAE-F589-48A3-8D56-A03EC9A06D65}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28C7DDAE-F589-48A3-8D56-A03EC9A06D65}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28C7DDAE-F589-48A3-8D56-A03EC9A06D65}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8F19D401-6168-4280-A0EB-247920C008DF}
+	EndGlobalSection
+EndGlobal
