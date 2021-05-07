@@ -13,9 +13,21 @@ namespace MvxPoet.Core.ViewModels
         public WritePoemViewModel()
         {
             WriteToFileCommand = new MvxCommand(WriteToFile);
+            SuggestRhymesCommand = new MvxCommand(SuggestRhymes);
+
+            if (!_dictionary.LoadKnownWords())
+            {
+                _canUseDictionary = false;
+                _rhymeSuggestions = "Nie udało się załadowac słownika. Przepraszamy.";
+            }
         }
 
+        private Dictionary _dictionary = new Dictionary();
+
+        private bool _canUseDictionary = true;
+
         public IMvxCommand WriteToFileCommand { get; set; }
+        public IMvxCommand SuggestRhymesCommand { get; set; }
 
         private string _title;
 
@@ -158,5 +170,30 @@ namespace MvxPoet.Core.ViewModels
             }
         }
 
+        private string _givenWord;
+
+        public string GivenWord
+        {
+            get { return _givenWord; }
+            set
+            {
+                SetProperty(ref _givenWord, value);
+                RaisePropertyChanged(() => CanSuggestRhymes);
+            }
+        }
+
+        private string _rhymeSuggestions;
+
+        public string RhymeSuggestions
+        {
+            get { return _rhymeSuggestions; }
+        }
+
+        public bool CanSuggestRhymes => (!string.IsNullOrWhiteSpace(_givenWord) && GivenWord.Length > 2 && _canUseDictionary);
+
+        private void SuggestRhymes()
+        {
+            _rhymeSuggestions = _dictionary.SuggestRhymes(_givenWord, Rhyme.FEMININE);
+        }
     }
 }
