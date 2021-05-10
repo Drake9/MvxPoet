@@ -1,62 +1,46 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
+﻿using System.Collections.Generic;
+using MvxPoet.Core.Properties;
+using Newtonsoft.Json;
 
 namespace MvxPoet.Core.Models
 {
     class Dictionary
     {
-        private string _filePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\odm1.txt";
-
-        public List<string> KnownWords { get; set; }
+        public Dictionary<string, string> RhymesDictionary { get; set; }
 
         public Dictionary()
         {
-            KnownWords = new List<string>();
+            RhymesDictionary = new Dictionary<string, string>();
         }
 
-        public bool LoadKnownWords()
+        public bool LoadDictionaryFromFile()
         {
             try
             {
-                var content = File.ReadAllText(_filePath);
-                var lines = content.Split('\n');
+                string json = Resources.rhymes_dictionary;
 
-                foreach (string line in lines)
-                {
-                    int lastCut = 0;
-
-                    for (int i = 0; i < line.Length; i++)
-                    {
-                        if (line[i] == ',')
-                        {
-                            KnownWords.Add(line.Substring(lastCut, i - lastCut));
-
-                            lastCut += 2;
-                        }
-                    }
-                }
+                RhymesDictionary = JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
 
                 return true;
-
-            } catch
+            }
+            catch
             {
                 return false;
             }
         }
 
-        public string SuggestRhymes(string word, Rhyme rhyme)
+        public string SuggestRhymes(string givenWord)
         {
-            string result = "";
-
-            foreach(string knownword in KnownWords)
+            foreach (KeyValuePair<string, string> entry in RhymesDictionary)
             {
-                if (VerseModel.DoesItRhyme(word, knownword) == rhyme)
-                    result += knownword;
+
+                if (VerseModel.DoesItRhyme(givenWord, entry.Key) != Rhyme.NONE)
+                {
+                    return entry.Value;
+                }
             }
 
-            return result;
+            return "Sorry. No rhymes found.";
         }
     }
 }

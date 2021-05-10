@@ -15,7 +15,7 @@ namespace MvxPoet.Core.ViewModels
             WriteToFileCommand = new MvxCommand(WriteToFile);
             SuggestRhymesCommand = new MvxCommand(SuggestRhymes);
 
-            if (!_dictionary.LoadKnownWords())
+            if (!_dictionary.LoadDictionaryFromFile())
             {
                 _canUseDictionary = false;
                 _rhymeSuggestions = "Nie udało się załadowac słownika. Przepraszamy.";
@@ -193,7 +193,8 @@ namespace MvxPoet.Core.ViewModels
 
         private void SuggestRhymes()
         {
-            _rhymeSuggestions = _dictionary.SuggestRhymes(_givenWord, Rhyme.FEMININE);
+            _rhymeSuggestions = _dictionary.SuggestRhymes(_givenWord);
+            RaisePropertyChanged(() => RhymeSuggestions);
         }
     }
 }
