@@ -8,8 +8,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MvxPoet.Wpf"
         mc:Ignorable="d"
-        Title="Pan Poeta" Height="750" Width="1000" WindowStartupLocation="CenterScreen">
-    <Grid>
+        Title="Pan Poeta" Height="790" Width="1120" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+<Grid>
 
-    </Grid>
+</Grid>
+
 </views:MvxWindow>

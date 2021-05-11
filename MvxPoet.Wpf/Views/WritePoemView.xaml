@@ -8,13 +8,16 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MvxPoet.Wpf.Views"
-             mc:Ignorable="d" FontSize="16"
-             d:DesignHeight="750" d:DesignWidth="1000">
+             mc:Ignorable="d" FontSize="16" FontFamily="Palatino Linotype"
+             Background="#524438"
+             d:DesignHeight="750" d:DesignWidth="1110">
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="70"/>
+            <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="auto"/>
@@ -35,47 +38,49 @@
 
         <Button x:Name="ReadButton" Grid.Column="1" Grid.Row="1" Margin="10" MinWidth="70" MaxWidth="70" Click="ReadButton_Click">Wczytaj</Button>
         <Button mvx:Bi.nd="Command WriteToFileCommand" IsEnabled="{Binding CanWriteToFile}" Grid.Column="2" Grid.Row="1" Margin="10" MinWidth="70" MaxWidth="70" HorizontalAlignment="Left">Zapisz</Button>
-        <TextBlock Grid.Column="1" Grid.Row="2" Margin="10" MinWidth="50" TextAlignment="Right">Tytuł:</TextBlock>
-        <TextBox x:Name="Title" Grid.Column="2" Grid.Row="2" Margin="10" Width="auto" Grid.ColumnSpan="3" Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBlock Foreground="#f2f0e6" Grid.Column="1" Grid.Row="2" Margin="10" MinWidth="50" TextAlignment="Right">Tytuł:</TextBlock>
+        <TextBox x:Name="Title" Background="#f2f0e6" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Left" Margin="10" Width="310" Grid.ColumnSpan="3" Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}"/>
 
 
-        <ScrollViewer Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="4" Height="580" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+        <ScrollViewer Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="4" Margin="10" Height="600" Width="690" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
             <StackPanel Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="4" Orientation="Horizontal">
-                
-                <TextBox x:Name="Text" Grid.Column="1" Grid.Row="3" Margin="10" Width="400" MinHeight="560" Grid.ColumnSpan="4" Text="{Binding Text, UpdateSourceTrigger=PropertyChanged}" AcceptsReturn="True" AcceptsTab="True" TextBlock.LineHeight="20" ScrollViewer.HorizontalScrollBarVisibility="Auto"/>
-                <ListView Grid.Column="5" Grid.Row="3"  Margin="10" Width="100" ItemsSource="{Binding LinesEndings}" ScrollViewer.HorizontalScrollBarVisibility="Auto">
+
+                <TextBox x:Name="Text" Background="#f2f0e6" Padding="5" Margin="0 0 10 0" Grid.Column="1" Grid.Row="3" Width="400" MinHeight="560" Grid.ColumnSpan="4" Text="{Binding Text, UpdateSourceTrigger=PropertyChanged}" AcceptsReturn="True" AcceptsTab="True" TextBlock.LineHeight="20" ScrollViewer.HorizontalScrollBarVisibility="Auto"/>
+
+                <ListView Background="#f2f0e6" Grid.Column="5" Grid.Row="3"  Margin="10 0" Width="120" ItemsSource="{Binding LinesEndings}" ScrollViewer.HorizontalScrollBarVisibility="Auto">
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">
-                            <Setter Property="Height" Value="21" />
+                            <Setter Property="Height" Value="21.5" />
+                            <Setter Property="VerticalAlignment" Value="Top" />
                         </Style>
                     </ListView.ItemContainerStyle>
                 </ListView>
-                <ListView Grid.Column="6" Grid.Row="3" Margin="10" MinWidth="20" ItemsSource="{Binding NumbersOfSyllables}">
+                <ListView Background="#f2f0e6" Grid.Column="6" Grid.Row="3" Margin="10 0" Width="30" ItemsSource="{Binding NumbersOfSyllables}">
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">
-                            <Setter Property="Height" Value="21" />
+                            <Setter Property="Height" Value="21.5" />
                         </Style>
                     </ListView.ItemContainerStyle>
                 </ListView>
-                <ListView Grid.Column="7" Grid.Row="3" Margin="10" MinWidth="20" ItemsSource="{Binding Rhymes}">
+                <ListView Background="#f2f0e6" Grid.Column="7" Grid.Row="3" Margin="10 0" Width="30" ItemsSource="{Binding Rhymes}">
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">
-                            <Setter Property="Height" Value="21" />
+                            <Setter Property="Height" Value="21.5" />
                         </Style>
                     </ListView.ItemContainerStyle>
                 </ListView>
                 
             </StackPanel>
         </ScrollViewer>
-        
-        
 
-        <TextBlock Grid.Column="8" Grid.Row="1" Margin="10" MinWidth="100" TextAlignment="Right">Znajdź rym do:</TextBlock>
-        <TextBox Grid.Column="9" Grid.Row="1" Margin="10" Width="auto" Text="{Binding GivenWord, UpdateSourceTrigger=PropertyChanged}"/>
+
+
+        <TextBlock Foreground="#f2f0e6" Grid.Column="8" Grid.Row="1" Margin="10" Width="120" TextAlignment="Right">Znajdź rym do:</TextBlock>
+        <TextBox Background="#f2f0e6" Grid.Column="9" Grid.Row="1" Margin="10" MinWidth="200" Width="auto" Text="{Binding GivenWord, UpdateSourceTrigger=PropertyChanged}"/>
         <Button mvx:Bi.nd="Command SuggestRhymesCommand" IsEnabled="{Binding CanSuggestRhymes}" Grid.Column="9" Grid.Row="2" Margin="10" MinWidth="100">Szukaj rymów</Button>
 
-        <ScrollViewer Grid.Column="8" Grid.Row="3" Margin="10" MinWidth="100" MinHeight="580" MaxWidth="300" MaxHeight="580" Grid.ColumnSpan="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
-            <TextBlock Grid.Column="8" Grid.Row="3" Margin="10" MinWidth="100" MinHeight="580" Grid.ColumnSpan="2" Text="{Binding RhymeSuggestions}" LineHeight="20" TextWrapping="Wrap"/>
+        <ScrollViewer Grid.Column="8" Grid.Row="3" Margin="10 0" Width="340" Height="600" Grid.ColumnSpan="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+            <TextBlock Padding="10" Margin="0" Background="#f2f0e6" Grid.Column="8" Grid.Row="3" Text="{Binding RhymeSuggestions}" LineHeight="20" TextWrapping="Wrap"/>
         </ScrollViewer>
     </Grid>
 </views:MvxWpfView>
