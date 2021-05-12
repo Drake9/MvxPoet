@@ -25,10 +25,15 @@ namespace MvxPoet.Wpf.Views
             Title.Clear();
             Text.Clear();
 
-            string content = File.ReadAllText(selectedFilePath);
+            try {
+                string content = File.ReadAllText(selectedFilePath);
 
-            Title.Text = content.Substring(0, content.IndexOf("\n\n"));
-            Text.Text = content.Substring(content.IndexOf("\n\n") + 2);
+                Title.Text = content.Substring(0, content.IndexOf("\n\n"));
+                Text.Text = content.Substring(content.IndexOf("\n\n") + 2);
+            } catch
+            {
+
+            }
         }
     }
 }

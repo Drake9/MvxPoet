@@ -8,8 +8,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MvxPoet.Wpf.Views"
-             mc:Ignorable="d" FontSize="16" FontFamily="Palatino Linotype"
-             Background="#524438"
+             mc:Ignorable="d" FontSize="16" FontFamily="Palatino Linotype" FontWeight="Bold"
+             Background="#524438" UseLayoutRounding="True"
              d:DesignHeight="750" d:DesignWidth="1110">
 
     <Grid>
@@ -69,7 +69,7 @@
                         </Style>
                     </ListView.ItemContainerStyle>
                 </ListView>
-                
+
             </StackPanel>
         </ScrollViewer>
 
@@ -82,5 +82,6 @@
         <ScrollViewer Grid.Column="8" Grid.Row="3" Margin="10 0" Width="340" Height="600" Grid.ColumnSpan="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
             <TextBlock Padding="10" Margin="0" Background="#f2f0e6" Grid.Column="8" Grid.Row="3" Text="{Binding RhymeSuggestions}" LineHeight="20" TextWrapping="Wrap"/>
         </ScrollViewer>
+
     </Grid>
 </views:MvxWpfView>

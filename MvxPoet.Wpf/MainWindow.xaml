@@ -9,8 +9,36 @@
         xmlns:local="clr-namespace:MvxPoet.Wpf"
         mc:Ignorable="d"
         Title="Pan Poeta" Height="790" Width="1120" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
-<Grid>
+    <Grid>
 
-</Grid>
+    </Grid>
+
+    <Window.Resources>
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="#e99a43"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Border.Effect">
+                        <Setter.Value>
+                            <DropShadowEffect Color="#f2f0e6" Direction="0" ShadowDepth="0" BlurRadius="10"/>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Background" Value="#f2f0e6"/>
+                    <Setter Property="Foreground" Value="#976f48"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
 
 </views:MvxWindow>
