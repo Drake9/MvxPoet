@@ -35,5 +35,26 @@ namespace MvxPoet.Wpf.Views
 
             }
         }
+
+        private void SaveButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            var dialog = new SaveFileDialog();
+            dialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            dialog.FileName = Title.Text;
+            dialog.Title = "Zapisz wiersz do pliku:";
+            dialog.Filter = "Dokument tekstowy(.txt)| *.txt";
+            dialog.DefaultExt = ".txt";
+
+            bool? result = dialog.ShowDialog();
+
+            // Process save file dialog box results
+            if (result == true)
+            {
+                using (StreamWriter outputFile = new StreamWriter(Path.Combine(dialog.FileName)))
+                {
+                    outputFile.Write(Title.Text + "\n\n" + Text.Text);
+                }
+            }
+        }
     }
 }

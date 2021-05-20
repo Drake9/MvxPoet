@@ -37,7 +37,7 @@
         </Grid.RowDefinitions>
 
         <Button x:Name="ReadButton" Grid.Column="1" Grid.Row="1" Margin="10" MinWidth="70" MaxWidth="70" Click="ReadButton_Click">Wczytaj</Button>
-        <Button mvx:Bi.nd="Command WriteToFileCommand" IsEnabled="{Binding CanWriteToFile}" Grid.Column="2" Grid.Row="1" Margin="10" MinWidth="70" MaxWidth="70" HorizontalAlignment="Left">Zapisz</Button>
+        <Button x:Name="SaveButton" IsEnabled="{Binding CanWriteToFile}" Grid.Column="2" Grid.Row="1" Margin="10" MinWidth="70" MaxWidth="70" HorizontalAlignment="Left" Click="SaveButton_Click">Zapisz</Button>
         <TextBlock Foreground="#f2f0e6" Grid.Column="1" Grid.Row="2" Margin="10" MinWidth="50" TextAlignment="Right">Tytuł:</TextBlock>
         <TextBox x:Name="Title" Background="#f2f0e6" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Left" Margin="10" Width="310" Grid.ColumnSpan="3" Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}"/>
 

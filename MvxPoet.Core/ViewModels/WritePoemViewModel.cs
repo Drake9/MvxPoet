@@ -2,8 +2,6 @@
 using MvvmCross.ViewModels;
 using MvvmCross.Commands;
 using MvxPoet.Core.Models;
-using System;
-using System.IO;
 using System.Collections.Generic;
 
 namespace MvxPoet.Core.ViewModels
@@ -12,7 +10,6 @@ namespace MvxPoet.Core.ViewModels
     {
         public WritePoemViewModel()
         {
-            WriteToFileCommand = new MvxCommand(WriteToFile);
             SuggestRhymesCommand = new MvxCommand(SuggestRhymes);
 
             if (!_dictionary.LoadDictionaryFromFile())
@@ -25,11 +22,16 @@ namespace MvxPoet.Core.ViewModels
         private Dictionary _dictionary = new Dictionary();
 
         private bool _canUseDictionary = true;
-
-        public IMvxCommand WriteToFileCommand { get; set; }
-        public IMvxCommand SuggestRhymesCommand { get; set; }
-
         private string _title;
+        private string _text;
+        private string _givenWord;
+        private string _rhymeSuggestions;
+
+        private ObservableCollection<string> _linesEndings = new ObservableCollection<string>();
+        private ObservableCollection<int?> _numbersOfSyllables = new ObservableCollection<int?>();
+        private ObservableCollection<char> _rhymes = new ObservableCollection<char>();
+
+        public IMvxCommand SuggestRhymesCommand { get; set; }       
 
         public string Title
         {
@@ -40,8 +42,6 @@ namespace MvxPoet.Core.ViewModels
             }
         }
 
-        private string _text;
-
         public string Text
         {
             get { return _text; }
@@ -49,6 +49,7 @@ namespace MvxPoet.Core.ViewModels
                 SetProperty(ref _text, value);
                 RaisePropertyChanged(() => TextLenght);
 
+                ClearTables();
                 SetLinesEndingsAndNumbersOfSyllables();
                 SetRhymes();
 
@@ -61,19 +62,8 @@ namespace MvxPoet.Core.ViewModels
 
         public int TextLenght => Text.Length;
 
-        public void WriteToFile()
-        {
-            string docPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-
-            using (StreamWriter outputFile = new StreamWriter(Path.Combine(docPath, Title + ".txt")))
-            {
-                    outputFile.WriteLine(Title + "\n\n" + Text);
-            }
-        }
-
         public bool CanWriteToFile => Title?.Length > 0 && Text?.Length > 0;
-
-        private ObservableCollection<string> _linesEndings = new ObservableCollection<string>();
+       
         public ObservableCollection<string> LinesEndings
         {
             get { return _linesEndings; }
@@ -84,9 +74,6 @@ namespace MvxPoet.Core.ViewModels
             if (!string.IsNullOrWhiteSpace(Text))
             {
                 var lines = Text.Split('\n');
-                _linesEndings.Clear();
-                _numbersOfSyllables.Clear();
-                _rhymes.Clear();
 
                 for (int i = 0; i < lines.Length; i++)
                 {
@@ -96,15 +83,17 @@ namespace MvxPoet.Core.ViewModels
             }
         }
 
-        private ObservableCollection<int?> _numbersOfSyllables = new ObservableCollection<int?>();
+        private void ClearTables()
+        {
+            _linesEndings.Clear();
+            _numbersOfSyllables.Clear();
+            _rhymes.Clear();
+        }      
 
         public ObservableCollection<int?> NumbersOfSyllables
         {
             get { return _numbersOfSyllables; }
         }
-
-
-        private ObservableCollection<char> _rhymes = new ObservableCollection<char>();
 
         public ObservableCollection<char> Rhymes
         {
@@ -170,8 +159,6 @@ namespace MvxPoet.Core.ViewModels
             }
         }
 
-        private string _givenWord;
-
         public string GivenWord
         {
             get { return _givenWord; }
@@ -181,8 +168,6 @@ namespace MvxPoet.Core.ViewModels
                 RaisePropertyChanged(() => CanSuggestRhymes);
             }
         }
-
-        private string _rhymeSuggestions;
 
         public string RhymeSuggestions
         {

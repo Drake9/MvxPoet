@@ -40,7 +40,7 @@ namespace MvxPoet.Core.Models
                 }
             }
 
-            return "Sorry. No rhymes found.";
+            return "Nie znaleziono rymów do podanego wyrażenia.";
         }
     }
 }

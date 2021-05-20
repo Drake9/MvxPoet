@@ -5,6 +5,7 @@ namespace MvxPoet.Core.Models
 {
     public class VerseModel
     {
+        private const int MinLineLength = 3;
         public string Text { get; set; }
 
         public static string GetPolishLetters() { return "ąćęłńóśżźĄĆĘŁŃÓŚŻŹ"; }
@@ -83,7 +84,7 @@ namespace MvxPoet.Core.Models
 
         public static string GetLastSyllables(string line)
         {
-            if (string.IsNullOrWhiteSpace(line) || line.Length < 3)
+            if (string.IsNullOrWhiteSpace(line) || line.Length < MinLineLength)
                 return "";
 
             int wantedSyllablesNumber = 2;
