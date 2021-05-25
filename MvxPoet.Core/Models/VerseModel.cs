@@ -209,7 +209,7 @@ namespace MvxPoet.Core.Models
                 return Rhyme.FEMININE;
         }
 
-        public static string RemoveSpecialCharacters(string str)
+        private static string RemoveSpecialCharacters(string str)
         {
             StringBuilder sb = new StringBuilder();
             string polishLetters = GetPolishLetters();

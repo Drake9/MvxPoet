@@ -6,6 +6,24 @@ namespace TestProject1.Tests
     class VerseModelTests
     {
         [Test]
+        [TestCase(null, 0)]
+        [TestCase("", 0)]
+        [TestCase(" ", 0)]
+        [TestCase("\n", 0)]
+        [TestCase("z", 0)]
+        [TestCase("qwrtpsdfghjklzxcvbnm", 0)]
+        [TestCase("qwrtpsdfgh jklzxcvbnm", 0)]
+        [TestCase("a", 1)]
+        [TestCase("a ja na to jak na lato", 8)]
+        [TestCase("ziemia", 2)]
+        [TestCase("auto", 2)]
+        [TestCase("i a u", 3)]
+        public void NumberOfSyllables_WhenCalled_ReturnCorrectResult(string line, int result)
+        {
+            Assert.That(VerseModel.NumberOfSyllables(line) == result);
+        }
+
+        [Test]
         [TestCase("a ja na to", 0, true)]
         [TestCase("a ja na to", 1, false)]
         [TestCase("a ja na to", 2, false)]
@@ -27,9 +45,31 @@ namespace TestProject1.Tests
         [TestCase("jak na lato", 8, true)]
         [TestCase("jak na lato", 9, false)]
         [TestCase("jak na lato", 10, true)]
+        [TestCase("ziemia", 0, false)]
+        [TestCase("ziemia", 1, false)]
+        [TestCase("ziemia", 2, true)]
+        [TestCase("ziemia", 3, false)]
+        [TestCase("ziemia", 4, false)]
+        [TestCase("ziemia", 5, true)]
         public void IsSyllableCore_WhenCalled_ReturnCorrectResult(string line, int index, bool result)
         {
             Assert.That(VerseModel.IsSyllableCore(line, index) == result);
+        }
+
+        [Test]
+        [TestCase(null, "")]
+        [TestCase("", "")]
+        [TestCase(" ", "")]
+        [TestCase("\n", "")]
+        [TestCase("a", "")]
+        [TestCase("aa", "")]
+        [TestCase("aaa", "-a-a")]
+        [TestCase("a ja na to", "na to")]
+        [TestCase("posprzątalibyśmy", "-by-śmy")]
+        [TestCase("bedzie tak", "-dzie tak")]
+        public void GetLastSyllables_WhenCalled_ReturnCorrectresult(string line, string result)
+        {
+            Assert.That(VerseModel.GetLastSyllables(line) == result);
         }
 
         [Test]
